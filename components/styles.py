@@ -350,10 +350,8 @@ def inject_login_styles():
         background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F0F9FF 100%) !important;
     }
     .block-container {
-        padding-top: 0 !important;
-        display: flex;
-        align-items: center;
-        min-height: 100vh;
+        padding-top: 4rem !important;
+        padding-bottom: 4rem !important;
     }
 
     /* ── Login Form Card ────────────────────────────────── */
