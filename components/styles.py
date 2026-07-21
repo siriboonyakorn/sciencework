@@ -349,10 +349,6 @@ def inject_login_styles():
     .stApp {
         background: linear-gradient(135deg, #F8FAFC 0%, #EFF6FF 50%, #F0F9FF 100%) !important;
     }
-    .block-container {
-        padding-top: 4rem !important;
-        padding-bottom: 4rem !important;
-    }
 
     /* ── Login Form Card ────────────────────────────────── */
     [data-testid="stForm"] {

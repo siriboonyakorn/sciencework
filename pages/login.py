@@ -38,6 +38,7 @@ def _do_login(student_id: str, password: str):
 inject_login_styles()
 
 # ── Layout: center the login card ────────────────────────────────────────────
+st.markdown('<div style="height: 6vh;"></div>', unsafe_allow_html=True)
 _spacer_l, _center, _spacer_r = st.columns([1.2, 1.6, 1.2])
 
 with _center:
