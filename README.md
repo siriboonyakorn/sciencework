@@ -2,7 +2,7 @@
 ## Project Specification
 ## Need to use python i going to public it on a streamlit
 # Overview
-
+## focus one the design.md
 Build a modern, clean, responsive Lab Room Pre-Order application for students and lecturers to reserve laboratory rooms.
 
 The design should be minimal, professional, and inspired by modern SaaS dashboards (Notion, Linear, Stripe, Vercel, Apple). Avoid outdated UI components.
