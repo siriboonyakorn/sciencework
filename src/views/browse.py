@@ -5,7 +5,7 @@ def render_browse():
     st.markdown("""
     <div class="main-header">
         <h1>Pre-Order Laboratory Rooms</h1>
-        <p>Explore specialized research spaces, verify biosafety levels, and instantly lock in time slots.</p>
+        <p>Explore specialized research spaces, verify biosafety levels, and lock in time slots with 100% complimentary research access.</p>
     </div>
     """, unsafe_allow_html=True)
 
@@ -13,17 +13,17 @@ def render_browse():
     f_col1, f_col2, f_col3, f_col4 = st.columns([1.5, 1, 1, 1])
 
     with f_col1:
-        search_query = st.text_input("🔍 Search Lab Name, Equipment, or ID", placeholder="e.g. Mass Spec, Cleanroom, BSL-2...")
+        search_query = st.text_input("Search Lab Name, Equipment, or ID", placeholder="Search by keyword, equipment, BSL...")
 
     with f_col2:
         buildings = ["All Buildings"] + sorted(list(set(l["building"] for l in st.session_state.labs)))
-        selected_bldg = st.selectbox("🏢 Building Wing", buildings)
+        selected_bldg = st.selectbox("Building Wing", buildings)
 
     with f_col3:
-        status_filter = st.selectbox("🟢 Availability Status", ["All Statuses", "Available Only", "Occupied", "Maintenance"])
+        status_filter = st.selectbox("Availability Status", ["All Statuses", "Available Only", "Occupied", "Maintenance"])
 
     with f_col4:
-        bsl_filter = st.selectbox("🛡️ Biosafety Level", ["All BSL Levels", "BSL-1", "BSL-2", "BSL-3"])
+        bsl_filter = st.selectbox("Biosafety Level", ["All BSL Levels", "BSL-1", "BSL-2", "BSL-3"])
 
     st.markdown("<br/>", unsafe_allow_html=True)
 
@@ -47,7 +47,7 @@ def render_browse():
     st.caption(f"Showing **{len(filtered_labs)}** matching laboratory suites")
 
     if not filtered_labs:
-        st.warning("No laboratory suites matched your filter criteria. Try adjusting your search query or filters.")
+        st.warning("No laboratory suites matched your search. Try resetting your search filters.")
         return
 
     # Display Labs Grid (2 Columns)
@@ -82,8 +82,7 @@ def render_browse():
                         </div>
                         <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #ededf9; padding-top: 0.8rem; margin-top: 0.5rem;">
                             <div>
-                                <span style="font-size: 1.15rem; font-weight: 800; color: #004ac6;">${lab['rate']:.2f}</span>
-                                <span style="font-size: 0.78rem; color: #737686;"> / hour</span>
+                                <span class="free-badge">FREE / COMPLIMENTARY</span>
                             </div>
                             <div style="font-size: 0.78rem; color: #434655; font-weight: 600;">
                                 👥 Cap: {lab['capacity']} | 🛡️ {lab['bsl_level']}
@@ -93,13 +92,13 @@ def render_browse():
                     """, unsafe_allow_html=True)
 
                     # Interactive Pre-Order Form
-                    with st.expander(f"📅 Pre-Order / Reserve {lab['id']}", expanded=False):
+                    with st.expander(f"Pre-Order / Reserve {lab['id']}", expanded=False):
                         if lab["status"] == "Maintenance":
-                            st.warning(f"⚠️ **{lab['id']}** is currently under scheduled maintenance. Pre-orders will require manual administrator clearance.")
+                            st.warning(f"Note: **{lab['id']}** is currently under maintenance. Pre-orders require administrator approval.")
                         elif lab["status"] == "Occupied":
-                            st.info(f"ℹ️ **{lab['id']}** is currently occupied. You can schedule future dates below.")
+                            st.info(f"Note: **{lab['id']}** is currently occupied. You may pre-order for upcoming dates below.")
 
-                        st.markdown(f"**Pre-Ordering {lab['name']}**")
+                        st.markdown(f"**Pre-Order Form for {lab['name']}**")
                         
                         form_col1, form_col2 = st.columns(2)
                         with form_col1:
@@ -128,15 +127,12 @@ def render_browse():
                                     "02:00 PM - 04:00 PM (2 hrs)",
                                     "04:00 PM - 06:00 PM (2 hrs)",
                                     "06:00 PM - 08:00 PM (2 hrs)",
-                                    "08:00 AM - 05:00 PM (Full Day - 9 hrs)"
+                                    "08:00 AM - 05:00 PM (Full Day Access)"
                                 ],
                                 key=f"slot_{lab['id']}"
                             )
-                            
-                            hours_num = 9.0 if "Full Day" in res_slot else 2.0
-                            est_cost = lab['rate'] * hours_num
                             st.markdown(
-                                f"<div style='background-color:#eef0ff; padding:0.6rem; border-radius:8px; border:1px solid #b4c5ff; font-size:0.88rem; color:#003ea8; font-weight:700; margin-top:0.5rem;'>Total Estimated Fee: <strong>${est_cost:.2f}</strong></div>", 
+                                "<div style='background-color:#dcfce7; padding:0.6rem; border-radius:8px; border:1px solid #bbf7d0; font-size:0.88rem; color:#15803d; font-weight:700; margin-top:0.5rem;'>Access Fee: <strong>$0.00 (Free Academic Access)</strong></div>", 
                                 unsafe_allow_html=True
                             )
 
@@ -159,9 +155,9 @@ def render_browse():
                                     "date": res_date.strftime("%Y-%m-%d"),
                                     "time_slot": res_slot,
                                     "status": initial_status,
-                                    "cost": est_cost
+                                    "cost": 0.00
                                 }
                                 st.session_state.reservations.insert(0, new_res)
                                 st.toast(f"✅ Pre-Order {new_id} created for {lab['name']}!", icon="🎉")
-                                st.success(f"Reservation Submitted! Order Ref: **{new_id}** (Status: **{initial_status}**)")
+                                st.success(f"Reservation Confirmed! Order Ref: **{new_id}** (Status: **{initial_status}**)")
                                 st.rerun()

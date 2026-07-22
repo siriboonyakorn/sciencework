@@ -24,7 +24,6 @@ CUSTOM_CSS = """
     --radius-lg: 16px;
     --shadow-sm: 0 2px 8px rgba(0, 74, 198, 0.04);
     --shadow-md: 0 8px 24px rgba(0, 74, 198, 0.08);
-    --shadow-lg: 0 16px 36px rgba(0, 74, 198, 0.12);
 }
 
 /* Base Body Styling */
@@ -40,10 +39,10 @@ h1, h2, h3, h4, h5, h6, .geist-font {
     font-weight: 700;
 }
 
-/* Custom Scrollbar */
+/* Clean Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
 }
 ::-webkit-scrollbar-track {
     background: var(--background);
@@ -51,9 +50,6 @@ h1, h2, h3, h4, h5, h6, .geist-font {
 ::-webkit-scrollbar-thumb {
     background: var(--outline-variant);
     border-radius: 9999px;
-}
-::-webkit-scrollbar-thumb:hover {
-    background: var(--outline);
 }
 
 /* Premium Main Header Banner */
@@ -68,32 +64,19 @@ h1, h2, h3, h4, h5, h6, .geist-font {
     overflow: hidden;
 }
 
-.main-header::after {
-    content: '';
-    position: absolute;
-    top: -50%;
-    right: -10%;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, rgba(255,255,255,0) 70%);
-    border-radius: 50%;
-    pointer-events: none;
-}
-
 .main-header h1 {
     color: #ffffff;
     font-weight: 800;
     margin: 0;
-    font-size: 2.3rem;
+    font-size: 2.2rem;
     line-height: 1.2;
 }
 
 .main-header p {
     color: #dbe1ff;
-    margin: 0.5rem 0 0 0;
-    font-size: 1.05rem;
+    margin: 0.4rem 0 0 0;
+    font-size: 1rem;
     font-weight: 400;
-    max-width: 750px;
 }
 
 /* Metric KPI Cards */
@@ -226,51 +209,63 @@ h1, h2, h3, h4, h5, h6, .geist-font {
     border: 1px solid var(--outline-variant);
 }
 
-/* Schedule Time Slot Chips */
-.slot-chip {
-    padding: 0.55rem 0.6rem;
-    border-radius: var(--radius-md);
-    text-align: center;
-    font-size: 0.8rem;
-    font-family: 'JetBrains Mono', monospace;
-    margin-bottom: 0.4rem;
-    font-weight: 600;
-    transition: all 0.15s ease-in-out;
-}
-
-.slot-available {
-    background-color: #ffffff;
+/* Free Badge */
+.free-badge {
+    display: inline-block;
+    background-color: #dcfce7;
     color: #15803d;
-    border: 1.5px dashed #86efac;
+    font-size: 0.85rem;
+    font-weight: 800;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-sm);
+    border: 1px solid #bbf7d0;
+    font-family: 'Geist', sans-serif;
 }
 
-.slot-selected {
-    background-color: #eff6ff;
-    border: 2px solid var(--primary);
-    color: var(--primary);
-}
-
-.slot-booked {
-    background-color: #f8fafc;
-    border: 1.5px solid #cbd5e1;
-    color: #94a3b8;
-    text-decoration: line-through;
-}
-
-/* Pass / Digital QR Card */
-.digital-pass {
-    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-    color: white;
-    padding: 1.4rem;
-    border-radius: var(--radius-lg);
-    box-shadow: 0 8px 24px rgba(15, 23, 42, 0.2);
-    border: 1px solid #334155;
-}
-
-/* Streamlit Native Component Tweaks */
+/* ULTRACLEAN SIDEBAR STYLING */
 [data-testid="stSidebar"] {
-    background-color: #f3f3fe;
-    border-right: 1px solid var(--outline-variant);
+    background-color: #ffffff !important;
+    border-right: 1px solid #e2e8f0 !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h2, 
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] h3 {
+    font-family: 'Geist', sans-serif;
+}
+
+/* Clean Radio Navigation */
+[data-testid="stSidebar"] div[role="radiogroup"] {
+    gap: 0.3rem;
+}
+
+[data-testid="stSidebar"] div[role="radiogroup"] label {
+    background-color: transparent;
+    padding: 0.65rem 0.9rem !important;
+    border-radius: var(--radius-md) !important;
+    border: 1px solid transparent !important;
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 600 !important;
+    font-size: 0.92rem !important;
+    color: #334155 !important;
+    transition: all 0.15s ease-in-out !important;
+    margin-bottom: 0.15rem;
+}
+
+[data-testid="stSidebar"] div[role="radiogroup"] label:hover {
+    background-color: #f1f5f9 !important;
+    color: #0f172a !important;
+}
+
+[data-testid="stSidebar"] div[role="radiogroup"] label[data-checked="true"] {
+    background-color: #eff6ff !important;
+    color: #004ac6 !important;
+    border-color: #bfdbfe !important;
+    font-weight: 700 !important;
+}
+
+/* Hide radio circle radio indicators for ultra-clean list feel */
+[data-testid="stSidebar"] div[role="radiogroup"] label div[first-child] {
+    display: none !important;
 }
 
 div.stButton > button {
@@ -291,17 +286,6 @@ div.stButton > button[kind="primary"]:hover {
     background-color: var(--primary-hover);
     box-shadow: 0 6px 18px rgba(0, 74, 198, 0.32);
     transform: scale(1.015);
-}
-
-div[data-baseweb="tab-list"] {
-    gap: 0.5rem;
-}
-
-div[data-baseweb="tab"] {
-    border-radius: var(--radius-md);
-    padding: 0.5rem 1.2rem;
-    font-family: 'Geist', sans-serif;
-    font-weight: 600;
 }
 </style>
 """

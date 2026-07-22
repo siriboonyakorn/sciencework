@@ -16,7 +16,6 @@ def render_dashboard():
     total_labs = len(labs)
     avail_labs = len([l for l in labs if l["status"] == "Available"])
     active_res = len([r for r in reservations if r["status"] in ["Confirmed", "Pending Approval"]])
-    total_val = sum(r["cost"] for r in reservations if r["status"] in ["Confirmed", "Pending Approval"])
 
     # Top KPI Metrics Row
     m1, m2, m3, m4 = st.columns(4)
@@ -24,18 +23,18 @@ def render_dashboard():
     with m1:
         st.markdown(f"""
         <div class="metric-box">
-            <div class="metric-label">TOTAL LAB FACILITIES</div>
+            <div class="metric-label">TOTAL LAB SUITES</div>
             <div class="metric-value">{total_labs}</div>
-            <div class="metric-sub">Across 6 Specialized Wings</div>
+            <div class="metric-sub">Across 6 Facility Wings</div>
         </div>
         """, unsafe_allow_html=True)
 
     with m2:
         st.markdown(f"""
         <div class="metric-box">
-            <div class="metric-label">AVAILABLE NOW</div>
+            <div class="metric-label">FREE & AVAILABLE NOW</div>
             <div class="metric-value" style="color: #16a34a;">{avail_labs}</div>
-            <div class="metric-sub">Ready for Immediate Pre-Order</div>
+            <div class="metric-sub">Ready for Pre-Order</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -44,16 +43,16 @@ def render_dashboard():
         <div class="metric-box">
             <div class="metric-label">ACTIVE BOOKINGS</div>
             <div class="metric-value" style="color: #2563eb;">{active_res}</div>
-            <div class="metric-sub">Confirmed & Pending Orders</div>
+            <div class="metric-sub">Confirmed & Pending</div>
         </div>
         """, unsafe_allow_html=True)
 
     with m4:
-        st.markdown(f"""
+        st.markdown("""
         <div class="metric-box">
-            <div class="metric-label">ACTIVE BOOKING VALUE</div>
-            <div class="metric-value" style="color: #4648d4;">${total_val:,.2f}</div>
-            <div class="metric-sub">Estimated Revenue</div>
+            <div class="metric-label">RESEARCH ACCESS COST</div>
+            <div class="metric-value" style="color: #16a34a;">$0.00</div>
+            <div class="metric-sub">100% Free Academic Grant</div>
         </div>
         """, unsafe_allow_html=True)
 
@@ -117,7 +116,7 @@ def render_dashboard():
     df_res = pd.DataFrame(reservations)
     if not df_res.empty:
         st.dataframe(
-            df_res[["res_id", "lab_id", "lab_name", "researcher", "department", "date", "time_slot", "status", "cost"]],
+            df_res[["res_id", "lab_id", "lab_name", "researcher", "department", "date", "time_slot", "status"]],
             use_container_width=True,
             column_config={
                 "res_id": "Order Ref",
@@ -127,7 +126,6 @@ def render_dashboard():
                 "department": "Department",
                 "date": "Date",
                 "time_slot": "Scheduled Window",
-                "status": "Status",
-                "cost": st.column_config.NumberColumn("Estimated Fee", format="$%.2f")
+                "status": "Status"
             }
         )

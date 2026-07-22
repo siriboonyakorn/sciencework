@@ -12,7 +12,7 @@ def initialize_state():
                 "floor": "Floor 1",
                 "capacity": 12,
                 "bsl_level": "BSL-2",
-                "rate": 85.00,
+                "rate": 0.00,
                 "status": "Available",
                 "image": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=600&q=80",
                 "description": "High-throughput cell culture workstation equipped with sterile hoods and real-time qPCR systems.",
@@ -25,7 +25,7 @@ def initialize_state():
                 "floor": "Floor 2",
                 "capacity": 6,
                 "bsl_level": "BSL-1",
-                "rate": 140.00,
+                "rate": 0.00,
                 "status": "Available",
                 "image": "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?auto=format&fit=crop&w=600&q=80",
                 "description": "Vibration-isolated optical suite for ultrafast laser experiments and Raman spectroscopy.",
@@ -38,7 +38,7 @@ def initialize_state():
                 "floor": "Floor 3",
                 "capacity": 8,
                 "bsl_level": "BSL-2",
-                "rate": 110.00,
+                "rate": 0.00,
                 "status": "Occupied",
                 "image": "https://images.unsplash.com/photo-1579154204601-01588f351e67?auto=format&fit=crop&w=600&q=80",
                 "description": "Full chemical synthesis facility with high-vacuum lines and high-resolution LC-MS instrumentation.",
@@ -51,7 +51,7 @@ def initialize_state():
                 "floor": "Floor 1",
                 "capacity": 4,
                 "bsl_level": "BSL-1",
-                "rate": 220.00,
+                "rate": 0.00,
                 "status": "Available",
                 "image": "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?auto=format&fit=crop&w=600&q=80",
                 "description": "Ultra-clean environment designed for semiconductor microfabrication, photolithography, and MEMS.",
@@ -64,7 +64,7 @@ def initialize_state():
                 "floor": "Floor 4",
                 "capacity": 5,
                 "bsl_level": "BSL-2",
-                "rate": 310.00,
+                "rate": 0.00,
                 "status": "Maintenance",
                 "image": "https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=600&q=80",
                 "description": "Cryogenic electron microscope suite with automated sample preparation for atomic-resolution macromolecular structures.",
@@ -77,7 +77,7 @@ def initialize_state():
                 "floor": "Floor 2",
                 "capacity": 15,
                 "bsl_level": "BSL-1",
-                "rate": 95.00,
+                "rate": 0.00,
                 "status": "Available",
                 "image": "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?auto=format&fit=crop&w=600&q=80",
                 "description": "Reconfigurable modular testbed equipped with Vicon motion capture tracking and high-power computing racks.",
@@ -98,7 +98,7 @@ def initialize_state():
                 "date": today,
                 "time_slot": "08:00 AM - 12:00 PM",
                 "status": "Confirmed",
-                "cost": 440.00
+                "cost": 0.00
             },
             {
                 "res_id": "RES-8922",
@@ -110,7 +110,7 @@ def initialize_state():
                 "date": (date.today() + timedelta(days=1)).strftime("%Y-%m-%d"),
                 "time_slot": "01:00 PM - 05:00 PM",
                 "status": "Pending Approval",
-                "cost": 340.00
+                "cost": 0.00
             },
             {
                 "res_id": "RES-8923",
@@ -122,7 +122,7 @@ def initialize_state():
                 "date": (date.today() + timedelta(days=2)).strftime("%Y-%m-%d"),
                 "time_slot": "09:00 AM - 01:00 PM",
                 "status": "Confirmed",
-                "cost": 560.00
+                "cost": 0.00
             }
         ]
 

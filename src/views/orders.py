@@ -9,13 +9,13 @@ def render_orders():
     </div>
     """, unsafe_allow_html=True)
 
-    tab1, tab2 = st.tabs(["📌 Active & Pending Pre-Orders", "✅ Completed & Past Orders"])
+    tab1, tab2 = st.tabs(["Active & Pending Pre-Orders", "Completed & Past Orders"])
 
     with tab1:
         active_list = [r for r in st.session_state.reservations if r["status"] in ["Confirmed", "Pending Approval"]]
         
         if not active_list:
-            st.info("No active pre-orders found. Head over to **Browse & Pre-Order Labs** to schedule a room.")
+            st.info("No active pre-orders found. Head over to **Browse & Pre-Order** to schedule a room.")
         else:
             for res in active_list:
                 with st.container():
@@ -37,8 +37,8 @@ def render_orders():
                             <div>⏰ <strong>Time Window:</strong><br/>{res['time_slot']}</div>
                         </div>
                         <div style="margin-top: 1rem; border-top: 1px solid #ededf9; padding-top: 0.8rem; display: flex; justify-content: space-between; align-items: center;">
-                            <span style="font-family: 'Geist', sans-serif; font-size: 1.05rem; font-weight: 800; color: #004ac6;">
-                                Total Estimated Fee: ${res['cost']:.2f}
+                            <span style="font-family: 'Geist', sans-serif; font-size: 0.9rem; font-weight: 700; color: #15803d;">
+                                Access Fee: $0.00 (Free Academic Access)
                             </span>
                             <span style="font-size: 0.8rem; color: #737686;">Project Code: <code>{res.get('project', 'N/A')}</code></span>
                         </div>
@@ -50,7 +50,7 @@ def render_orders():
                     with c_act1:
                         pass_data = json.dumps(res, indent=2)
                         st.download_button(
-                            label="📄 Download Pass",
+                            label="Download Pass",
                             data=pass_data,
                             file_name=f"{res['res_id']}_LabPass.json",
                             mime="application/json",
@@ -59,19 +59,19 @@ def render_orders():
 
                     with c_act2:
                         if res["status"] == "Pending Approval":
-                            if st.button("✅ Approve Order", key=f"app_{res['res_id']}"):
+                            if st.button("Approve Order", key=f"app_{res['res_id']}"):
                                 res["status"] = "Confirmed"
                                 st.toast(f"Approved reservation {res['res_id']}", icon="✅")
                                 st.rerun()
 
                     with c_act3:
-                        if st.button("❌ Cancel Order", key=f"cancel_{res['res_id']}"):
+                        if st.button("Cancel Order", key=f"cancel_{res['res_id']}"):
                             st.session_state.reservations = [r for r in st.session_state.reservations if r["res_id"] != res["res_id"]]
                             st.toast(f"Cancelled reservation {res['res_id']}", icon="🗑️")
                             st.rerun()
 
                     with c_act4:
-                        with st.popover("🔑 Digital Access Key"):
+                        with st.popover("Digital Access Key"):
                             st.markdown(f"**Lab Keycard Authorization**")
                             st.caption(f"Ref: {res['res_id']} | Facility: {res['lab_id']}")
                             st.markdown(f"""
